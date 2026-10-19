@@ -11,11 +11,10 @@ metadata:
 spec:
   type: {{ .Values.service.type }}
   selector:
-    matchLabels:
-      project: roboshop
-      tier: frontend
-      component: frontend
-      purpose: deployment
+    project: roboshop
+    tier: frontend
+    component: frontend
+    purpose: deployment
   ports: 
     - protocol: TCP
       port: 80  # service port
