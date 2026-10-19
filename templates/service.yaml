@@ -1,5 +1,5 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: v1
+kind: Service
 metadata:
   name: nginx
   # labels related to deployment resource
@@ -9,24 +9,15 @@ metadata:
     component: frontend
     purpose: deployment
 spec:
-  replicas: 10 
+  type: {{ .Values.service.type }}
   selector:
     matchLabels:
       project: roboshop
       tier: frontend
       component: frontend
       purpose: deployment
-  #pod
-  template:
-    metadata:
-      labels:
-        project: roboshop
-        tier: frontend
-        component: frontend
-        purpose: deployment
-    spec:
-      containers:
-      - name: nginx
-        image: nginx:latest
-        ports:
-        - containerPort: 80
+  ports: 
+    - protocol: TCP
+      port: 80  # service port
+      targetPort: 80  # container port
+    
